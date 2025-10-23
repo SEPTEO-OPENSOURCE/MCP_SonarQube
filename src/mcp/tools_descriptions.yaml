@@ -1,0 +1,352 @@
+# Descriptions des outils MCP SonarQube
+# Format: nom_outil → description, paramètres, schéma
+
+sonarqube_issues:
+  name: "sonarqube_issues"
+  title: "Issues SonarQube"
+  description: |
+    🔍 ISSUES SONARQUBE - Récupère vos issues assignées.
+    
+    ⚡ OUTIL AUTOMATIQUE utilisant les variables d'environnement :
+    - SONARQUBE_PROJECT_KEY (projet)
+    - SONARQUBE_USER (utilisateur)
+    
+    📝 Utilisez CET OUTIL pour :
+    - ✅ "Montre-moi mes issues SonarQube" → issues()
+    - ✅ "Mes issues assignées" → issues()
+    - ✅ "Qu'ai-je à corriger ?" → issues()
+    - ✅ "Mes problèmes SonarQube" → issues()
+    - ✅ "Issues dans main.dart" → issues({file_path: "main.dart"})
+    
+    ⚠️ IMPORTANT: Appeler SANS PARAMÈTRE (objet vide {}) pour "mes issues"
+    
+    🔧 Paramètres : file_path (optionnel)
+  parameters:
+    file_path:
+      type: "string"
+      description: "Chemin du fichier pour filtrer (optionnel)"
+      required: false
+
+sonarqube_search_issues:
+  name: "sonarqube_search_issues"
+  title: "Recherche d'issues"
+  description: |
+    🔎 RECHERCHE D'ISSUES - Recherche des issues dans un projet avec filtres optionnels.
+    
+    ✅ Cas d'usage:
+    - Chercher toutes les issues d'un projet
+    - Chercher les issues assignées à un utilisateur spécifique
+    - Chercher les issues non assignées
+    - Chercher les issues par statut (OPEN, CONFIRMED, FALSE_POSITIVE, ACCEPTED, FIXED, IN_SANDBOX)
+    - Chercher les issues par plusieurs statuts simultanément
+    
+    📝 Exemples:
+    - "Issues du projet my-project" → search_issues({project_key: "my-project"})
+    - "Issues de John dans my-project" → search_issues({project_key: "my-project", assignee: "john"})
+    - "Issues non assignées du projet X" → search_issues({project_key: "X", assignee: ""})
+    - "Issues ouvertes du projet X" → search_issues({project_key: "X", statuses: ["OPEN"]})
+    - "Issues corrigées de John" → search_issues({project_key: "my-project", assignee: "john", statuses: ["FIXED"]})
+    - "Issues ouvertes ou confirmées" → search_issues({project_key: "my-project", statuses: ["OPEN", "CONFIRMED"]})
+    - "Issues OPEN, CONFIRMED ou FIXED" → search_issues({project_key: "X", statuses: ["OPEN", "CONFIRMED", "FIXED"]})
+    
+    🔧 Paramètres : project_key (requis), assignee (optionnel), statuses (optionnel)
+  parameters:
+    project_key:
+      type: "string"
+      description: "Clé du projet SonarQube"
+      required: true
+    assignee:
+      type: "string"
+      description: "Login de l'utilisateur assigné (optionnel, vide pour issues non assignées)"
+      required: false
+    statuses:
+      type: "array"
+      items:
+        type: "string"
+        enum: ["OPEN", "CONFIRMED", "FALSE_POSITIVE", "ACCEPTED", "FIXED", "IN_SANDBOX"]
+      description: "Liste de statuts pour filtrer par plusieurs statuts simultanément (optionnel)"
+      required: false
+
+sonarqube_measures:
+  name: "sonarqube_measures"
+  title: "Métriques"
+  description: |
+    📊 MÉTRIQUES - Récupère les métriques de qualité d'un projet.
+    
+    ✅ Cas d'usage:
+    - Analyser la qualité du code
+    - Vérifier la couverture de tests
+    - Suivre la dette technique
+    
+    📝 Exemples:
+    - "Métriques du projet X"
+    - "Couverture de tests du projet Y"
+    - "Dette technique de Z"
+    
+    🔧 Outil autonome, aucune configuration supplémentaire requise.
+  parameters:
+    project_key:
+      type: "string"
+      description: "Clé du projet SonarQube"
+      required: true
+    metrics:
+      type: "array"
+      items:
+        type: "string"
+      description: "Liste des métriques (optionnel)"
+      required: false
+
+sonarqube_hotspots:
+  name: "sonarqube_hotspots"
+  title: "Sécurité"
+  description: |
+    🔒 SÉCURITÉ - Récupère les hotspots de sécurité d'un projet.
+    
+    ✅ Cas d'usage:
+    - Audit de sécurité
+    - Revue des vulnérabilités potentielles
+    - Priorisation des corrections de sécurité
+    
+    📝 Exemples:
+    - "Hotspots de sécurité du projet X"
+    - "Vulnérabilités à revoir"
+    - "Points de sécurité sensibles"
+    
+    🔧 Outil autonome, aucune configuration supplémentaire requise.
+  parameters:
+    project_key:
+      type: "string"
+      description: "Clé du projet SonarQube"
+      required: true
+    status:
+      type: "string"
+      enum: ["TO_REVIEW", "REVIEWED", "SAFE"]
+      description: "Statut des hotspots (TO_REVIEW, REVIEWED, SAFE)"
+      required: false
+
+sonarqube_rule:
+  name: "sonarqube_rule"
+  title: "Règle"
+  description: |
+    📖 RÈGLE - Récupère les détails d'une règle SonarQube.
+    
+    ✅ Cas d'usage:
+    - Comprendre une règle de qualité
+    - Savoir comment corriger une issue
+    - Documenter les bonnes pratiques
+    
+    📝 Exemples:
+    - "Explique la règle dart:S1192"
+    - "Détails de la règle S125"
+    - "Comment corriger xml:S125 ?"
+    
+    🔧 Outil autonome, aucune configuration supplémentaire requise.
+  parameters:
+    rule_key:
+      type: "string"
+      description: "Clé de la règle (ex: dart:S1192, xml:S125)"
+      required: true
+
+sonarqube_users:
+  name: "sonarqube_users"
+  title: "Utilisateurs"
+  description: |
+    👥 UTILISATEURS - Recherche des utilisateurs SonarQube.
+    
+    ✅ Cas d'usage:
+    - Trouver le login d'un utilisateur
+    - Vérifier les permissions
+    - Assigner des issues
+    
+    📝 Exemples:
+    - "Cherche l'utilisateur jean"
+    - "Login de Marie Dupont"
+    - "Utilisateurs du projet"
+    
+    🔧 Outil autonome, aucune configuration supplémentaire requise.
+  parameters:
+    query:
+      type: "string"
+      description: "Terme de recherche (nom, email, login)"
+      required: true
+
+sonarqube_quality_gate:
+  name: "sonarqube_quality_gate"
+  title: "Quality Gate"
+  description: |
+    ✅ QUALITY GATE - Récupère le statut du Quality Gate d'un projet.
+    
+    ✅ Cas d'usage:
+    - Vérifier si le projet peut être déployé
+    - Contrôle qualité avant release
+    - Dashboard de qualité
+    
+    📝 Exemples:
+    - "Quality Gate du projet X"
+    - "Le projet Y passe-t-il les tests qualité ?"
+    - "Statut qualité de Z"
+    
+    🔧 Outil autonome, aucune configuration supplémentaire requise.
+  parameters:
+    project_key:
+      type: "string"
+      description: "Clé du projet SonarQube"
+      required: true
+
+sonarqube_ping:
+  name: "sonarqube_ping"
+  title: "Ping"
+  description: |
+    🏓 PING - Test simple pour vérifier que le MCP fonctionne.
+    
+    Retourne "pong" avec les variables d'environnement configurées.
+    Utilisez pour tester la connexion MCP.
+    
+    📝 Exemples :
+    - "Teste le MCP SonarQube"
+    - "Ping SonarQube"
+    
+    🔧 Outil de diagnostic sans paramètre.
+  parameters: {}
+
+sonarqube_analyses_history:
+  name: "sonarqube_analyses_history"
+  title: "Historique des analyses"
+  description: |
+    📊 HISTORIQUE ANALYSES - Récupère l'historique des analyses d'un projet.
+    
+    ✅ Cas d'usage:
+    - Suivre l'évolution de la qualité dans le temps
+    - Identifier les régressions
+    - Analyser les tendances
+    
+    📝 Exemples:
+    - "Historique des analyses du projet X"
+    - "Analyses depuis le 2025-01-01"
+    - "Évolution qualité du projet Y"
+    
+    🔧 Outil autonome, utilise SONARQUBE_PROJECT_KEY si non spécifié.
+  parameters:
+    project_key:
+      type: "string"
+      description: "Clé du projet (optionnel si défaut configuré)"
+      required: false
+    from_date:
+      type: "string"
+      description: "Date de début (format: YYYY-MM-DD)"
+      required: false
+    to_date:
+      type: "string"
+      description: "Date de fin (format: YYYY-MM-DD)"
+      required: false
+
+sonarqube_duplications:
+  name: "sonarqube_duplications"
+  title: "Duplications de code"
+  description: |
+    🔄 DUPLICATIONS - Détecte le code dupliqué dans un fichier.
+    
+    ✅ Cas d'usage:
+    - Identifier le code à refactorer
+    - Réduire la duplication
+    - Améliorer la maintenabilité
+    
+    📝 Exemples:
+    - "Duplications dans main.dart"
+    - "Code dupliqué de UserService.java"
+    
+    ⚠️ IMPORTANT: file_key doit être au format "project:path/to/file"
+  parameters:
+    file_key:
+      type: "string"
+      description: "Clé du fichier (format: project:path/to/file)"
+      required: true
+
+sonarqube_source_lines:
+  name: "sonarqube_source_lines"
+  title: "Code source annoté"
+  description: |
+    📝 CODE SOURCE - Affiche le code source avec annotations SonarQube.
+    
+    ✅ Cas d'usage:
+    - Voir le code avec issues annotées
+    - Comprendre le contexte d'une issue
+    - Analyser une portion de code
+    
+    📝 Exemples:
+    - "Code source de main.dart"
+    - "Lignes 10-50 de UserService.java"
+    
+    ⚠️ IMPORTANT: file_key doit être au format "project:path/to/file"
+  parameters:
+    file_key:
+      type: "string"
+      description: "Clé du fichier (format: project:path/to/file)"
+      required: true
+    from_line:
+      type: "integer"
+      description: "Ligne de début (défaut: 1)"
+      required: false
+    to_line:
+      type: "integer"
+      description: "Ligne de fin (optionnel)"
+      required: false
+
+sonarqube_metrics_list:
+  name: "sonarqube_metrics_list"
+  title: "Liste des métriques"
+  description: |
+    📐 MÉTRIQUES - Liste toutes les métriques disponibles.
+    
+    ✅ Cas d'usage:
+    - Découvrir les métriques disponibles
+    - Choisir les métriques à suivre
+    - Comprendre les métriques SonarQube
+    
+    📝 Exemples:
+    - "Quelles métriques sont disponibles ?"
+    - "Liste des métriques SonarQube"
+    
+    🔧 Outil sans paramètre.
+  parameters: {}
+
+sonarqube_languages:
+  name: "sonarqube_languages"
+  title: "Langages supportés"
+  description: |
+    🌐 LANGAGES - Liste les langages de programmation supportés.
+    
+    ✅ Cas d'usage:
+    - Vérifier si un langage est supporté
+    - Découvrir les langages disponibles
+    
+    📝 Exemples:
+    - "Quels langages sont supportés ?"
+    - "Liste des langages SonarQube"
+    
+    🔧 Outil sans paramètre.
+  parameters: {}
+
+sonarqube_projects:
+  name: "sonarqube_projects"
+  title: "Liste des projets"
+  description: |
+    📂 PROJETS - Liste tous les projets disponibles sur SonarQube.
+    
+    ✅ Cas d'usage:
+    - Découvrir les projets disponibles
+    - Rechercher un projet spécifique
+    - Obtenir une vue d'ensemble des projets
+    
+    📝 Exemples:
+    - "Liste tous les projets SonarQube"
+    - "Quels sont les projets disponibles ?"
+    - "Recherche projets contenant 'mobile'"
+    - "Projets SonarQube"
+    
+    🔧 Outil autonome, recherche optionnelle.
+  parameters:
+    search:
+      type: "string"
+      description: "Terme de recherche pour filtrer les projets (optionnel)"
+      required: false

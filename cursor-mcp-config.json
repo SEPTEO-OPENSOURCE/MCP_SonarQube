@@ -1,0 +1,23 @@
+{
+    "mcpServers": {
+        "sonarqube": {
+            "command": "/path/to/SonarQubeMCP/venv/bin/python",
+            "args": [
+                "/path/to/SonarQubeMCP/sonarqube_mcp_server.py"
+            ],
+            "env": {
+                "SONARQUBE_QUALITY_AUDIENCE": "assistant",
+                "SONARQUBE_QUALITY_PRIORITY": "0.8",
+                "SONARQUBE_SECURITY_AUDIENCE": "assistant",
+                "SONARQUBE_SECURITY_PRIORITY": "0.9",
+                "SONARQUBE_METADATA_ENABLED": "true"
+            },
+            "capabilities": {
+                "resources": {
+                    "subscribe": true,
+                    "listChanged": true
+                }
+            }
+        }
+    }
+}

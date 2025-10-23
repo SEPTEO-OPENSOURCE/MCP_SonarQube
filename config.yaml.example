@@ -1,0 +1,47 @@
+# Exemple de configuration SonarQube MCP
+# Copiez ce fichier vers config.yaml et adaptez les valeurs
+
+# URL du serveur SonarQube (peut être défini via SONARQUBE_URL)
+url: "https://sonarqube.example.com"
+
+# Token d'authentification (RECOMMANDÉ via variable d'environnement SONARQUBE_TOKEN)
+# token: "votre_token_ici"
+
+# Note: Les variables d'environnement sont prioritaires sur les valeurs de ce fichier
+# SONARQUBE_URL, SONARQUBE_TOKEN, SONARQUBE_PROJECT_KEY, SONARQUBE_USER
+
+# Configuration réseau
+timeout: 30
+max_retries: 3
+page_size: 500
+verify_ssl: true
+
+# Métadonnées MCP
+quality_audience: "assistant"
+quality_priority: 0.8
+security_audience: "assistant"
+security_priority: 0.9
+metadata_enabled: true
+
+# Projet par défaut
+default_project:
+  key: "MyProject"
+  name: "My Application"
+  branch: "main"
+  assignee: "developer-user"
+
+# Liste de projets additionnels
+projects:
+  - key: "MyProject"
+    name: "My Application"
+    branch: "main"
+    assignee: "developer-user"
+  
+  - key: "AnotherProject"
+    name: "Another Project"
+    branch: "develop"
+    assignee: "another-user"
+
+
+
+

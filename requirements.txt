@@ -1,0 +1,28 @@
+# Dépendances pour SonarQube MCP
+#
+# Installation:
+#   pip install -r requirements.txt
+
+# HTTP et API
+requests>=2.31.0
+
+# Configuration YAML
+PyYAML>=6.0.1
+
+# Tests (dev)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.1
+
+# Linting et formatage (dev)
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+
+# Type hints pour requests
+types-requests>=2.31.0
+types-PyYAML>=6.0.12
+
+
+
+

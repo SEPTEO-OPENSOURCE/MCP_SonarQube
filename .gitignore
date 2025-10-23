@@ -1,0 +1,103 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+sonarqube_env/
+*.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+test-results/
+coverage.xml
+
+# MyPy & Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+.pyre/
+
+# Configuration sensible (ne jamais committer)
+config.yaml
+.env
+.env.local
+.env.*.local
+*_local.yaml
+secrets.yaml
+
+# Logs
+*.log
+logs/
+/tmp/
+*.log.*
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.bak
+*.swp
+*~.nib
+*.orig
+
+# Documentation générée
+docs/_build/
+site/
+
+# Fichiers système
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Azure DevOps
+.azure/
+
+# Fichiers de diagnostic personnalisés (ne pas versionner)
+diagnostic-output.txt
+*_diagnostic_*.txt
+
+
+
+
