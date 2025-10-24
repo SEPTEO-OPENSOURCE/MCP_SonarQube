@@ -31,7 +31,7 @@ class IssuesAPI(SonarQubeAPIBase):
         
         if project_keys:
             params['componentKeys'] = ','.join(project_keys)
-        if assignees:
+        if assignees and assignees[0] != '':
             params['assignees'] = ','.join(assignees)
         if types:
             params['types'] = ','.join([t.value for t in types])

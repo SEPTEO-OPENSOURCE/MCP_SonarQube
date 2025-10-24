@@ -271,6 +271,8 @@ class MCPServer:
             if assignee:  # Si non vide, valider
                 assignee = validate_user_login(assignee)
             args.append(assignee)
+        else:
+            args.append('')
         
         # Si statuses est spécifié, l'ajouter (supporte string ou array)
         if 'statuses' in arguments:
